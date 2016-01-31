@@ -1,0 +1,63 @@
+/*
+ * Copyright (c) 2013-2015, Xerox Corporation (Xerox)and Palo Alto Research Center (PARC)
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ *     * Redistributions of source code must retain the above copyright
+ *       notice, this list of conditions and the following disclaimer.
+ *     * Redistributions in binary form must reproduce the above copyright
+ *       notice, this list of conditions and the following disclaimer in the
+ *       documentation and/or other materials provided with the distribution.
+ *     * Patent rights are not granted under this agreement. Patent rights are
+ *       available under FRAND terms.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL XEROX or PARC BE LIABLE FOR ANY
+ * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+/**
+ * @file v1_cpi_add_route.h
+ * @brief A hand-encoded CPI packet to add a route
+ *
+ * The v1 old-style control packet is a fixed header plus a tlv container 0xBEEF with a "value" of the CPI JSON string.
+ * The packet type is 0xA4.
+ *
+ * @author Marc Mosko, Palo Alto Research Center (Xerox PARC)
+ * @copyright 2013-2015, Xerox Corporation (Xerox)and Palo Alto Research Center (PARC).  All rights reserved.
+ */
+
+#ifndef TransportRTA_v1_cpi_AddRoute_h
+#define TransportRTA_v1_cpi_AddRoute_h
+
+#include <ccnx/common/codec/testdata/testdata_common.h>
+#include <ccnx/common/codec/schema_v1/testdata/v1_CPISchema.h>
+
+__attribute__((unused))
+static uint8_t v1_cpi_add_route[] = "\x01\xA4\x00\xA7"
+                                    "\x00\x00\x00\x08"
+                                    "\xBE\xEF\x00\x9A"
+                                    "{\"CPI_REQUEST\":{\"SEQUENCE\":22,\"REGISTER\":{\"PREFIX\":\"lci:/howdie/stranger\",\"INTERFACE\":55,\"FLAGS\":0,\"PROTOCOL\":\"STATIC\",\"ROUTETYPE\":\"LONGEST\",\"COST\":200}}}";
+
+__attribute__((unused))
+static TruthTableEntry
+TRUTHTABLENAME(v1_cpi_add_route)[] =
+{
+    { .wellKnownType = true,  .indexOrKey = V1_MANIFEST_CPI_PAYLOAD, .bodyManifest = true, .extent = { 12, 155 } },
+    { .wellKnownType = false, .indexOrKey = T_INVALID,                          .extent = { 0,  0 } },
+};
+
+#define v1_cpi_add_route_truthTable TABLEENTRY(v1_cpi_add_route, TLV_ERR_NO_ERROR)
+
+#define v1_cpi_add_route_PrefixUri "lci:/howdie/stranger"
+#define v1_cpi_add_route_Sequence  22
+#define v1_cpi_add_route_Interface 55
+#endif // TransportRTA_cpi_AddRoute_h
