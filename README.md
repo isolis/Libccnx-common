@@ -24,6 +24,7 @@ This library depends on LongBow.
 Build and install LongBow by executing
 ```
 mkdir build
+cd build
 cmake ..
 make
 make install
